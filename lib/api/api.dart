@@ -2,14 +2,27 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 
 class ToDoAPI {
+  static String urlBase = 'http://192.168.0.14:3002/api/tasks';
   static Future getToDO() {
-    Uri url = Uri.parse('http://192.168.0.16:3002/api/tasks');
+    Uri url = Uri.parse(urlBase);
     return http.get(url);
   }
 
-  static Future postToDO(data) {
-    Uri url = Uri.parse('http://192.168.0.16:3002/api/tasks');
-    var dadoss = { "nome": data} ;
-    return http.post(url, body: { "nome": data});
+  static Future postToDO(title, description, date) {
+    Uri url = Uri.parse(urlBase);
+    print({title, description, date});
+
+    var payload = {
+      "titulo": title,
+      "description": description,
+      "date": date
+    } ;
+    print(payload);
+    return http.post(url, body: payload);
+  }
+
+  static Future deleteToDO(id) {
+    Uri url = Uri.parse(urlBase +'/${id }');
+    return http.delete(url);
   }
 }

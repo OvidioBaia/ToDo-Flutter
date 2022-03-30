@@ -3,24 +3,31 @@ import 'dart:convert';
 
 class Task {
   final int id;
-  final String nome;
+  final String titulo;
+  final String description;
+  final String date;
 
   const Task({required this.id,
-    required this.nome,
+    required this.titulo,
+    required this.description,
+    required this.date
   });
 
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(
       id: json['id'],
-      nome: json['nome']
+      titulo: json['titulo'],
+      description: json['description'],
+      date: json['date']
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['nome'] = this.nome;
-
+    data['titulo'] = this.titulo;
+    data['description'] = this.description;
+    data['date'] = this.date;
     return data;
   }
 }
